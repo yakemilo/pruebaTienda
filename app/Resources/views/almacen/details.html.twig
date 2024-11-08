@@ -1,0 +1,103 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}    
+    <div class="main container">        
+        <div class = "row well">
+            <div class = "col-md-6">
+                <div class = "page-header">
+                    <h2>Detalles Almacen</h2>
+                </div>
+                <dl>
+                    <dt>
+                        Almacen
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ almacen.nombre }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Código
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ almacen.codigo }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Teléfono
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ almacen.telefono }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Dirección
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ almacen.direccion }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Avtivo
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {% if almacen.activo == 1 %}
+						    <span class="text-success">Activo</span>
+                        {% elseif almacen.activo == 0 %}
+                            <span class="text-warning">Desactivado</span>
+                        {% endif %}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Latitud
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ almacen.latitud }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Longitud
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ almacen.longitud }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <p>	
+                    <a href=" {{ path ('app_almacen_list')}} " >	            
+                        <button type="button" class="btn btn-sm btn-info">
+                            <span class="glyphicon glyphicon-list btn_cerrar"></span>
+                            LISTA
+                        </button>
+                    </a>
+                    <a href="{{ path ('app_almacen_edit', {id: almacen.id})}}" >	            
+                        <button type="button" class="btn btn-sm btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            EDITAR
+                        </button>
+                    </a>
+                    {{ include ('form/deleteForm.html.twig', {form:delete_form, message: 'Está seguro qe desea eliminar el almacen'}) }}
+		        </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

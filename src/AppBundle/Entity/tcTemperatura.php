@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * tcTemperatura
@@ -12,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class tcTemperatura
 {
+    /**
+     * @ORM\OneToMany(targetEntity="Producto", mappedBy="temperatura")
+     */ 
+    protected $productos;
+    
     /**
      * @var int
      *
@@ -28,6 +34,10 @@ class tcTemperatura
      */
     private $temperatura;
 
+    public function __construct()
+    {
+        $this->productos = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -62,5 +72,38 @@ class tcTemperatura
     {
         return $this->temperatura;
     }
-}
 
+    /**
+     * Add producto
+     *
+     * @param \AppBundle\Entity\Producto $producto
+     *
+     * @return tcTemperatura
+     */
+    public function addProducto(\AppBundle\Entity\Producto $producto)
+    {
+        $this->productos[] = $producto;
+
+        return $this;
+    }
+
+    /**
+     * Remove producto
+     *
+     * @param \AppBundle\Entity\Producto $producto
+     */
+    public function removeProducto(\AppBundle\Entity\Producto $producto)
+    {
+        $this->productos->removeElement($producto);
+    }
+
+    /**
+     * Get productos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+}

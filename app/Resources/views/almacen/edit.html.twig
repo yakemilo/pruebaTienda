@@ -1,0 +1,75 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+
+    {{ parent() }}
+    {{ include ('messages/success.html.twig') }}
+    <div class="main container">
+        <div class = "row well">
+            <div class = "col-md-6">
+                <div class = "page-header">
+                    <h2>Editar Almacen</h2>
+                </div>
+                {{ form_start(form, {'attr' : {'novalidate':'novalidate', 'role':'form'}}) }}
+                
+                <fieldset>
+                    <div class= "form-group">
+                        {{ form_label(form.nombre) }}
+                        {{ form_widget(form.nombre, {'attr': {'class': 'form-control', 'placeholder' : 'Nombre de Almacen', 'readonly': 'readonly'}}) }}
+                        <span class="text-danger">{{ form_errors(form.nombre) }}</span>
+                    </div>
+
+                    <div class= "form-group">
+                        {{ form_label(form.codigo) }}
+                        {{ form_widget(form.codigo, {'attr': {'class': 'form-control', 'placeholder' : 'Código', 'readonly': 'readonly'}}) }}
+                        <span class="text-danger">{{ form_errors(form.codigo) }}</span>
+                    </div>
+
+                    <div class= "form-group">
+                        {{ form_label(form.telefono) }}
+                        {{ form_widget(form.telefono, {'attr': {'class': 'form-control', 'placeholder' : 'Teléfono'}}) }}
+                        <span class="text-danger">{{ form_errors(form.telefono) }}</span>
+                    </div>
+
+                    <div class= "form-group">
+                        {{ form_label(form.direccion) }}
+                        {{ form_widget(form.direccion, {'attr': {'class': 'form-control', 'placeholder' : 'Dirección'}}) }}
+                        <span class="text-danger">{{ form_errors(form.direccion) }}</span>
+                    </div>
+
+                    <div class= "checkbox">
+                        <label>
+                        {{ form_widget(form.activo) }} Activo
+                        <span class="text-danger">{{ form_errors(form.activo) }}</span>
+                        </label>
+                    </div>
+
+                    <div class= "form-group">
+                        {{ form_label(form.latitud) }}
+                        {{ form_widget(form.latitud, {'attr': {'class': 'form-control', 'placeholder' : 'Latitud'}}) }}
+                        <span class="text-danger">{{ form_errors(form.latitud) }}</span>
+                    </div>
+
+                    <div class= "form-group">
+                        {{ form_label(form.longitud) }}
+                        {{ form_widget(form.longitud, {'attr': {'class': 'form-control', 'placeholder' : 'Longitudn'}}) }}
+                        <span class="text-danger">{{ form_errors(form.longitud) }}</span>
+                    </div>
+
+                </fieldset>
+                <p>
+		            {{ form_widget(form.save, {'label' : 'Actualizar', 'attr': {'class': 'btn btn-success'}}) }}
+                    <a href=" {{ path ('app_almacen_list')}} " >	            
+                        <button type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove btn_cerrar"></span>
+                            Cerrar
+                        </button>
+                    </a>
+		        </p>                  
+
+                {{ form_end(form)}}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

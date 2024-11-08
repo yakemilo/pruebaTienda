@@ -1,3 +1,33 @@
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+
+app_usuario_usuario:
+    resource: '@AppBundle/config/routes/usuario.yml'
+    prefix: /usuario
+
+app_almacen_almacen:
+    resource: '@AppBundle/config/routes/almacen.yml'
+    prefix: /almacen
+
+app_producto_producto:
+    resource: '@AppBundle/config/routes/producto.yml'
+    prefix: /producto
+
+
+# Autentication
+
+app_index:
+    path:     /home
+    defaults: { _controller: AppBundle:usuario:index }
+
+app_user_login:
+    path:     /login
+    defaults: { _controller: AppBundle:security:login }
+
+app_user_login_check:
+    path:     /login_check
+    defaults: { _controller: AppBundle:security:loginCheck }
+
+app_user_logout:
+    path:     /logout

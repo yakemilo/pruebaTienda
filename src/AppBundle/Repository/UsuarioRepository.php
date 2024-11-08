@@ -10,4 +10,16 @@ namespace AppBundle\Repository;
  */
 class UsuarioRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function buscarUsuarioPass($id){
+        $connection = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT password FROM usuario WHERE id = :id';
+        
+
+        $stmt = $connection->prepare($sql);
+
+        $stmt->execute(['id'=>$id]);
+
+        return $stmt->fetchColumn();
+    }
 }

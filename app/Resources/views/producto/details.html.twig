@@ -1,0 +1,139 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}    
+    <div class="main container">        
+        <div class = "row well">
+            <div class = "col-md-6">
+                <div class = "page-header">
+                    <h2>Detalles Producto</h2>
+                </div>
+                <dl>
+                    <dt>
+                        Nombre
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ producto.nombre }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Código
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ producto.codigo }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Nombre traducido
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ producto.nombreTraduccion }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Fecha de creación
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ producto.fechaCreacion|date('d-m-Y H:i') }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Peso
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ producto.peso }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Volumen
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ producto.volumen }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Precio
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ producto.precio }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Marca
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ producto.marca }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Descripción
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ producto.descripcion }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Almacén
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ almacen.nombre }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Temperatura
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ temperatura.temperatura }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <p>	
+                    <a href=" {{ path ('app_producto_list')}} " >	            
+                        <button type="button" class="btn btn-sm btn-info">
+                            <span class="glyphicon glyphicon-list btn_cerrar"></span>
+                            LISTA
+                        </button>
+                    </a>
+                    <a href="{{ path ('app_producto_edit', {id: producto.id})}}" >	            
+                        <button type="button" class="btn btn-sm btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            EDITAR
+                        </button>
+                    </a>
+                    {{ include ('form/deleteForm.html.twig', {form:delete_form, message: 'Está seguro qe desea eliminar el almacen'}) }}
+		        </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

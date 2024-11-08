@@ -1,0 +1,79 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}    
+    <div class="main container">        
+        <div class = "row well">
+            <div class = "col-md-6">
+                <div class = "page-header">
+                    <h2>Detalles Usuario</h2>
+                </div>
+                <dl>
+                    <dt>
+                        Usuario
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ usuario.usuario }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Correo Electrónico
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {{ usuario.email }}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Rol
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {% if usuario.role == 'ROLE_ADMIN' %}
+						    Administrador
+                        {% elseif usuario.role == 'ROLE_USER' %}
+                            Usuario
+                        {% elseif usuario.role == 'ROLE_CLIENT' %}
+                            Cliente
+                        {% endif %}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        Avtivo
+                        &nbsp;
+                    </dt>
+                    <dd>
+                        {% if usuario.activo == 1 %}
+						    <span class="text-success">Activo</span>
+                        {% elseif usuario.activo == 0 %}
+                            <span class="text-warning">Desactivado</span>
+                        {% endif %}
+                        &nbsp;
+                    </dd>
+                </dl>
+                <p>	
+                    <a href=" {{ path ('app_usuario_list')}} " >	            
+                        <button type="button" class="btn btn-sm btn-info">
+                            <span class="glyphicon glyphicon-list btn_cerrar"></span>
+                            LISTA
+                        </button>
+                    </a>
+                    <a href="{{ path ('app_usuario_edit', {id: usuario.id})}}" >	            
+                        <button type="button" class="btn btn-sm btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            EDITAR
+                        </button>
+                    </a>
+                    {{ include ('form/deleteForm.html.twig', {form:delete_form, message: 'Está seguro qe desea eliminar el usuario'}) }}
+		        </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

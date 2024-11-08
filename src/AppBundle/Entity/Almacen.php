@@ -3,15 +3,25 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Almacen
  *
  * @ORM\Table(name="almacen")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AlmacenRepository")
+ * @UniqueEntity("nombre")
+ * @UniqueEntity("codigo")
  */
 class Almacen
 {
+    /**
+     * @ORM\OneToMany(targetEntity="Producto", mappedBy="almacen")
+     */ 
+    protected $productos;
+    
     /**
      * @var int
      *
@@ -25,6 +35,7 @@ class Almacen
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $nombre;
 
@@ -32,6 +43,7 @@ class Almacen
      * @var string
      *
      * @ORM\Column(name="codigo", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $codigo;
 
@@ -39,6 +51,7 @@ class Almacen
      * @var string
      *
      * @ORM\Column(name="telefono", type="string", length=15)
+     * @Assert\NotBlank()
      */
     private $telefono;
 
@@ -46,6 +59,7 @@ class Almacen
      * @var string
      *
      * @ORM\Column(name="direccion", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $direccion;
 
@@ -60,6 +74,7 @@ class Almacen
      * @var string
      *
      * @ORM\Column(name="latitud", type="string", length=50)
+     * @Assert\NotBlank()
      */
     private $latitud;
 
@@ -67,8 +82,14 @@ class Almacen
      * @var string
      *
      * @ORM\Column(name="longitud", type="string", length=50)
+     * @Assert\NotBlank()
      */
     private $longitud;
+
+    public function __construct()
+    {
+        $this->productos = new ArrayCollection();
+    }
 
 
     /**
@@ -248,5 +269,38 @@ class Almacen
     {
         return $this->longitud;
     }
-}
 
+    /**
+     * Add producto
+     *
+     * @param \AppBundle\Entity\Producto $producto
+     *
+     * @return Almacen
+     */
+    public function addProducto(\AppBundle\Entity\Producto $producto)
+    {
+        $this->productos[] = $producto;
+
+        return $this;
+    }
+
+    /**
+     * Remove producto
+     *
+     * @param \AppBundle\Entity\Producto $producto
+     */
+    public function removeProducto(\AppBundle\Entity\Producto $producto)
+    {
+        $this->productos->removeElement($producto);
+    }
+
+    /**
+     * Get productos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+}
